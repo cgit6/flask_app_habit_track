@@ -3,26 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 網頁名稱 -->
     <title>{{title}}</title>
-
+    <!-- 自型 -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
       rel="stylesheet"
     />
+    <!-- 樣式 -->
     <link
       rel="stylesheet"
-      href="{{url_for('static', filename='css/main.css') }}"
+      href="{{url_for('static', filename='css/style.css') }}"
     />
-
+    <!-- ??? -->
     {% block head_content %}{% endblock %}
   </head>
   <body>
     <header class="header">
       <h1 class="header__logo">
+        <!-- url_for => 裡面的的東西是路徑的 function name -->
         <a href="{{url_for('index')}}" class="header__link">Habits</a>
       </h1>
+      <!-- 如果??? -->
+      {% if "add" not in request.endpoint %}
+      <a href="{{url_for('add_habit')}}" class="header__link">+ Add new</a>
+      {% endif %}
     </header>
 
-    <main class="main">{% block main_content %} {% endblock %}</main>
+    <main class="main">
+      <!-- 主要的 -->
+      {% block main_content %} {% endblock %}
+    </main>
   </body>
 </html>

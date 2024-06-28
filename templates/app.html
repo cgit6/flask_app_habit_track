@@ -1,3 +1,10 @@
 {% extends "layout.html" %} {% block main_content %}
-<section></section>
+<section class="habit-list">
+  <!-- 印出資料庫所有內容 -->
+  {% for habit in habits %}
+  <div class="habit">
+    <p class="habit__name">{{habit}}</p>
+  </div>
+  {% endfor %}
+</section>
 {% endblock %}

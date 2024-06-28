@@ -7,3 +7,11 @@ body {
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
+
+/* header 跟 main 的樣式 */
+.header,
+.main {
+  max-width: 4rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
