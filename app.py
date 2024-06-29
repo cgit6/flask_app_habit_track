@@ -6,9 +6,12 @@ app = Flask(__name__)
 habits = ["Test habit","Test habit2"]
 
 # 以當前日期為基準向前向後三天，共7天
-def date_range(start: datetime.date):
-    dates = [start + datetime.timedelta(days=diff) for diff in range(-3,4)]
-    return dates
+@app.context_processor
+def add_cal_date_range():
+    def date_range(start: datetime.date):
+        dates = [start + datetime.timedelta(days=diff) for diff in range(-3,4)]
+        return dates
+    return {"date_range": date_range}
 
 
 @app.route("/")
@@ -20,9 +23,10 @@ def index():
     if date_str:
         selected_date = datetime.date.fromisoformat(date_str)
     else:
+        # 如果 url 中沒有date 的話顯示當天訊息
         selected_date = datetime.date.today()
 
-    return render_template("app.html", habits=habits ,title="Habit Tracker - Home", date_range=date_range, selected_date=selected_date)
+    return render_template("app.html", habits=habits ,title="Habit Tracker - Home", selected_date=selected_date)
 
 
 @app.route("/add", methods=["GET","POST"])
@@ -33,4 +37,4 @@ def add_habit():
         print("data",habit)
         habits.append(habit)
 
-    return render_template("add_habit.html", title="Habit Tracker - Add Habit")
+    return render_template("add_habit.html", title="Habit Tracker - Add Habit", selected_date=datetime.date.today())

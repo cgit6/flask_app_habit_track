@@ -1,15 +1,4 @@
 {% extends "layout.html" %} {% block main_content %}
-<!-- 顯示日期 -->
-<section class="dates">
-  {% for date in date_range(selected_date) %}
-  <a class="date__link" href="{{ url_for('index', date=date)}}">
-    <time class="date" datetime="{{ date }}">
-      <span>{{ date.strftime("%a")}}</span>
-      <span>{{ date.strftime("%d")}}</span>
-    </time>
-  </a>
-  {% endfor %}
-</section>
 
 <!-- 印出資料庫所有內容 -->
 <section class="habit-list">
