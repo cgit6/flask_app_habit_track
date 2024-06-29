@@ -1,2 +1,4 @@
 flask
 python-dotenv
+pymongo[srv]
+gunicorn # 只用於 render.com
